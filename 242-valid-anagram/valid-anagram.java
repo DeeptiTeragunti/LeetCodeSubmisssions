@@ -3,12 +3,20 @@ class Solution {
     public boolean isAnagram(String s, String t) {
         if (s.length() != t.length()) return false;   // quick reject, avoids sorting mismatched lengths
 
-        char[] str1 = s.toCharArray();
-        char[] str2 = t.toCharArray();
-
-        Arrays.sort(str1);
-        Arrays.sort(str2);
-
-        return Arrays.equals(str1, str2);   // compares char arrays directly — no String conversion needed
+        int[] cnt = new int[26];
+         
+        for(int i = 0 ; i < s.length(); i++ )
+        {
+            cnt[s.charAt(i)-'a']++;
+            cnt[t.charAt(i)-'a']--;
+        }
+         for(int num : cnt)
+         {
+             if(num != 0 )
+             {
+                return false;
+             }
+         }
+         return true ; 
     }
 }
